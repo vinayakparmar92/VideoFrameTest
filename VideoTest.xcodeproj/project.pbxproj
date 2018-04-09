@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66314248207BE2CB0060DD34 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66314247207BE2CB0060DD34 /* AVKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6693DCC4207A5CC700319F68 /* ConstantsAndUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6693DCC3207A5CC700319F68 /* ConstantsAndUtilities.swift */; };
 		6693DCC7207A5E6A00319F68 /* QuestionAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6693DCC5207A5E6A00319F68 /* QuestionAlertVC.swift */; };
 		6693DCC8207A5E6A00319F68 /* QuestionAlertVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6693DCC6207A5E6A00319F68 /* QuestionAlertVC.xib */; };
@@ -35,6 +36,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		66314247207BE2CB0060DD34 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		6693DCC3207A5CC700319F68 /* ConstantsAndUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsAndUtilities.swift; sourceTree = "<group>"; };
 		6693DCC5207A5E6A00319F68 /* QuestionAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAlertVC.swift; sourceTree = "<group>"; };
 		6693DCC6207A5E6A00319F68 /* QuestionAlertVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionAlertVC.xib; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66314248207BE2CB0060DD34 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +78,7 @@
 		669C6E2B207BDBB1007E2188 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				66314247207BE2CB0060DD34 /* AVKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

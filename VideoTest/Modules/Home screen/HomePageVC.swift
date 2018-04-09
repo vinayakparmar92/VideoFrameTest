@@ -22,6 +22,7 @@ class HomePageVC: UIViewController {
     
     // MARK: Variables
     var topPadding : CGFloat {
+        // To handle the safe area top padding due to safe area in iOS
         if #available(iOS 11, *) {
             return 20
         }
@@ -39,8 +40,7 @@ class HomePageVC: UIViewController {
                         // Return to normal state
                         if !weakSelf.isCollapsedState {
                             weakSelf.viewVideoLayerContainer.layer.cornerRadius = 0
-                            // y = 20 : Top padding
-                            weakSelf.viewVideoLayerContainer.frame = CGRect.init(x: 0, y: 0,
+                            weakSelf.viewVideoLayerContainer.frame = CGRect.init(x: 0, y: weakSelf.topPadding,
                                                                                  width: weakSelf.view.frame.size.width,
                                                                                  height: weakSelf.view.frame.size.height - weakSelf.topPadding)
                         }
@@ -79,6 +79,7 @@ class HomePageVC: UIViewController {
         
         let questionAlertVC = QuestionAlertVC.getQuestionAlertWith(questionText: randomQuestionText)
         questionAlertVC.modalPresentationStyle = .overCurrentContext
+        questionAlertVC.modalTransitionStyle = .crossDissolve
         
         // Configure callbacks 
         questionAlertVC.presentationCompleteCallBack = { [weak self] (upperBubblePosition) in
