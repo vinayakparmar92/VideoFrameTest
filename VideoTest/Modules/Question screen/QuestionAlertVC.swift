@@ -73,7 +73,7 @@ class QuestionAlertVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animate(withDuration: kAnimationDuration, animations: { [weak self] in
+        UIView.animate(withDuration: kSlowAnimationDuration, animations: { [weak self] in
             if let weakSelf = self {
                 // TODO: Consider other screen sizes for this scaling
                 weakSelf.imgViewExpandingCircle.transform = CGAffineTransform.init(scaleX: 1000, y: 1000)

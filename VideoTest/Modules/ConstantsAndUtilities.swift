@@ -12,6 +12,7 @@ import UIKit
 let kVideoName  = "VerticalVideo"
 let kVideoType  = "mp4"
 let kAnimationDuration = 0.35
+let kSlowAnimationDuration = 0.50
 let kFastAnimationDuration = 0.20
 let kVideoCollapsedFrameSize = 100
 let kPrimaryColor = UIColor.init(red: 142/255,
