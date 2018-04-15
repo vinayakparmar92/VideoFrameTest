@@ -10,7 +10,7 @@ import UIKit
 
 let kBorderWidth = CGFloat(10.0)
 let kLowerSubviewsCornerRadius = CGFloat(20.0)
-
+let kInitialStateRadius = CGFloat(1)
 
 class QuestionAlertVC: UIViewController {
     
@@ -21,6 +21,7 @@ class QuestionAlertVC: UIViewController {
     @IBOutlet weak var btnActionC:UIButton!
     @IBOutlet weak var viewUpperBubble: UIView!
     @IBOutlet weak var viewLowerSubviewsContainer: UIView!
+    @IBOutlet weak var imgViewExpandingCircle: UIImageView!
     
     // MARK: Variables
     var questionText : String?
@@ -29,6 +30,7 @@ class QuestionAlertVC: UIViewController {
     var optionCText : String?
     var presentationCompleteCallBack : ((CGRect)->())?
     var viewControllerDismissCallback : (()->())?
+    var viewdidLayoutCalledFirstTime = true
     
     // MARK: METHODS
     // MARK: Initialisers
@@ -48,11 +50,13 @@ class QuestionAlertVC: UIViewController {
     // MARK: View lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+            
         // Configure UI
         viewLowerSubviewsContainer.backgroundColor = kPrimaryColor
         viewUpperBubble.backgroundColor = kPrimaryColor
-        
+        viewUpperBubble.layer.cornerRadius = viewUpperBubble.bounds.size.width / 2
+        viewLowerSubviewsContainer.layer.cornerRadius = kLowerSubviewsCornerRadius
+
         // Assigning data to UI
         lblQuestionText.text = questionText
         btnActionA.setTitle(optionAText, for: .normal)
@@ -66,14 +70,33 @@ class QuestionAlertVC: UIViewController {
         viewControllerDismissCallback?()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: kAnimationDuration, animations: { [weak self] in
+            if let weakSelf = self {
+                // TODO: Consider other screen sizes for this scaling
+                weakSelf.imgViewExpandingCircle.transform = CGAffineTransform.init(scaleX: 1000, y: 1000)
+            }
+        }) { [weak self] (isComplete) in
+            if let weakSelf = self {
+                if isComplete {
+                    weakSelf.imgViewExpandingCircle.isHidden = true
+                }
+            }
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         // Creating holes
         putCraterInUpperBody()
         putCraterInLowerBody()
+        putCraterInMainContainerView()
+        putCraterInExpandingCircularImage()
         
-        presentationCompleteCallBack?(viewUpperBubble.frame)
+        presentationCompleteCallBack?(viewUpperBubble.frameForIdentityTransform)
     }
     
     // MARK: Button click events
@@ -82,46 +105,36 @@ class QuestionAlertVC: UIViewController {
                 completion: nil)
     }
     
-    // MARK: Helper mthods
+    // MARK: Helper methods
     // Create a crater in the upper bubble view
     func putCraterInUpperBody() {
-        let widthHalf = CGFloat(viewUpperBubble.frame.size.width / 2)
-        let radius = widthHalf - kBorderWidth
-        
-        let path = CGMutablePath()
-        path.addArc(center: CGPoint(x: viewUpperBubble.frame.size.width / 2, y: viewUpperBubble.frame.size.height / 2),
-                    radius: radius,
-                    startAngle: 0.0,
-                    endAngle: 2.0 * .pi,
-                    clockwise: false)
-        path.addRect(viewUpperBubble.bounds)
+        let radius = viewUpperBubble.bounds.size.width / 2 - kBorderWidth
 
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path
-        maskLayer.fillRule = kCAFillRuleEvenOdd
-        viewUpperBubble.layer.mask = maskLayer
-        viewUpperBubble.clipsToBounds = true
-        
-        viewUpperBubble.layer.cornerRadius = widthHalf
+        viewUpperBubble.putCraterOf(radius: radius, circleCenter: viewUpperBubble.center)
     }
     
     // Create a crater in the Lower body
     func putCraterInLowerBody() {
-        let radius = viewUpperBubble.frame.size.width / 2 - kBorderWidth
-        let path = CGMutablePath()
-        path.addArc(center: CGPoint(x: viewLowerSubviewsContainer.frame.size.width / 2, y: 0),
-                    radius: radius,
-                    startAngle: 0.0,
-                    endAngle: 2.0 * .pi,
-                    clockwise: false)
-        path.addRect(viewLowerSubviewsContainer.bounds)
-
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path
-        maskLayer.fillRule = kCAFillRuleEvenOdd
-        viewLowerSubviewsContainer.layer.mask = maskLayer
-        viewLowerSubviewsContainer.clipsToBounds = true
+        let radius = viewUpperBubble.bounds.size.width / 2 - kBorderWidth
+        let center = CGPoint(x: viewLowerSubviewsContainer.bounds.size.width / 2, y: 0)
         
-        viewLowerSubviewsContainer.layer.cornerRadius = kLowerSubviewsCornerRadius
+        viewLowerSubviewsContainer.putCraterOf(radius: radius,
+                                               circleCenter: center)
+    }
+    
+    func putCraterInMainContainerView() {
+        let center = viewUpperBubble.superview?.convert(viewUpperBubble.center,
+                                                        to: view)
+        let radius = viewUpperBubble.frameForIdentityTransform.size.width / 2 - kBorderWidth
+        
+        if let center = center {
+            view.putCraterOf(radius: radius,
+                             circleCenter: center)
+        }
+    }
+    
+    func putCraterInExpandingCircularImage() {
+        imgViewExpandingCircle.putCraterOf(radius: kInitialStateRadius,
+                                           circleCenter: imgViewExpandingCircle.center)
     }
 }
