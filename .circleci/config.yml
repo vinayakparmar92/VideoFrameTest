@@ -4,19 +4,19 @@
 #
 version: 2
 jobs:
-  build:
+  testing_circle_ci:
 
     # Specify the Xcode version to use
     macos:
-      xcode: "8.3.3"
+      xcode: "10.0"
 
     steps:
       - checkout
 
-      # Install CocoaPods
-      - run:
-          name: Install CocoaPods
-          command: pod install
+      # # Install CocoaPods
+      # - run:
+      #     name: Install CocoaPods
+      #     command: pod install
 
       # Build the app and run tests
       - run:
