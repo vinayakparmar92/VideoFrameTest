@@ -19,7 +19,6 @@
 		66C573C920790A33004776D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66C573C720790A33004776D3 /* LaunchScreen.storyboard */; };
 		66C573D120790A56004776D3 /* HomePageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66C573D020790A56004776D3 /* HomePageVC.xib */; };
 		66C573DF2079552A004776D3 /* VerticalVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 66C573DE2079552A004776D3 /* VerticalVideo.mp4 */; };
-		66C573E020795A33004776D3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66C573CA20790A33004776D3 /* Info.plist */; };
 		66C573E220795A40004776D3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66C573E120795A40004776D3 /* Default-568h@2x.png */; };
 		66C573E52079C752004776D3 /* AVPlayerLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C573E42079C752004776D3 /* AVPlayerLayerView.swift */; };
 /* End PBXBuildFile section */
@@ -224,7 +223,6 @@
 			files = (
 				66C573C920790A33004776D3 /* LaunchScreen.storyboard in Resources */,
 				66C573D120790A56004776D3 /* HomePageVC.xib in Resources */,
-				66C573E020795A33004776D3 /* Info.plist in Resources */,
 				66C573DF2079552A004776D3 /* VerticalVideo.mp4 in Resources */,
 				6693DCC8207A5E6A00319F68 /* QuestionAlertVC.xib in Resources */,
 				6643877C2083692900FEF49F /* background.jpg in Resources */,
