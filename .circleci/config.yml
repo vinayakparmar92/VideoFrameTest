@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  testing_circle_ci:
+  build:
 
     # Specify the Xcode version to use
     macos:
